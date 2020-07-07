@@ -123,4 +123,28 @@ plt.show()
 
 
 # ----------------------------------------------------------------------
+# 分析Ravenna风的方向以及频率
 
+hist, bins = np.histogram(df_ravenna['wind_deg'], 8, [0, 360])
+
+def showRoseWind(values, city_name, max_value):
+    N = 8
+
+    # theta = [pi*1/4, pi*2/4, pi*3/4, ..., pi*2]
+    theta = np.arange(2 * np.pi / 16, 2 * np.pi, 2 * np.pi / 8)
+    radii = np.array(values)
+    # 绘制极区图的坐标系
+    plt.axes([0.025, 0.025, 0.95, 0.95], polar=True)
+
+    # 列表中包含的是每一个扇区的 rgb 值，x越大，对应的color越接近蓝色
+    colors = [(1-x/max_value, 1-x/max_value, 0.75) for x in radii]
+
+    # 画出每个扇区
+    plt.bar(theta, radii, width=(2*np.pi/N), bottom=0.0, color=colors)
+
+    # 设置极区图的标题
+    plt.title(city_name, x=0.2, fontsize=20)
+
+    plt.show()
+
+showRoseWind(hist,'Ravenna',max(hist))
