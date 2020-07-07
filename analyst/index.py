@@ -21,7 +21,8 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from dateutil import parser
 
-
+# -------------------------------------------------------------------------------
+# 米兰温度时间分析表
 # 取出我们要分析的温度和日期数据
 y1 = df_milano['temp']
 x1 = df_milano['day']
@@ -46,8 +47,43 @@ ax.plot(day_milano ,y1, 'r')
 
 plt.show()
 
-# 把图片存储为png图
-# plt.savefig('figpath.png', dpi=400, bbox_inches='tight')
+# ---------------------------------------------------------------
+# 绘制折线图- 隐式创建figure画布对象
+# x = [1, 3, 5, 7]
+# y = [4, 9, 1, 9]
+#
+# plt.plot(x, y)
+# plt.show()
+
+
+# ----------------------------------------------------------------
+# 显示创建画布，可控制axes
+figure = plt.figure()
+axes1 = figure.add_subplot(2, 1, 1)
+axes2 = figure.add_subplot(2, 1, 2)
+
+axes1.plot([1, 3, 5, 7], [2, 4, 6, 8], ':b')
+axes2.plot([1, 2, 4, 6], [9, 3, 5, 6])
+
+# figure.show()
+plt.title('title')
+plt.xlabel('x axis caption')
+plt.ylabel('y axis caption')
+plt.show()     # pycharm 中绘图调用
+
+# -----------------------------------------------------------------
+# 频率分布图
+data = [22, 87, 5, 43, 56, 73, 55, 54, 11, 20, 51, 5, 79, 31, 27]
+a = np.array(data)
+hist, bins = np.histogram(a, bins = [0, 20, 40, 60, 80, 100])
+print(hist)
+print(bins)
+
+plt.hist(a, bins=[0, 20, 40, 60, 80, 100])
+plt.title("histogram")
+plt.show()
+
+#
 
 
 
